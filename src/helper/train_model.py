@@ -53,21 +53,27 @@ def train_model (dataset_directory: str):
     # Load and preprocess the data from the .txt files
     data, labels = read_data_from_files(dataset_directory)
 
-    # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.1, random_state=42)
+    # # Split the data into training and testing sets
+    # X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.1, random_state=42)
+
+    # # Create feature vectors using the bag-of-words model
+    # X_train_vectors = vectorizer.fit_transform(X_train)
+    # X_test_vectors = vectorizer.transform(X_test)
+
+    # # Train a Naive Bayes classifier
+    # classifier.fit(X_train_vectors, y_train)
+
+    # # Predict the labels for the test set
+    # y_pred = classifier.predict(X_test_vectors)
+
+    # # Evaluate the classifier
+    # print(classification_report(y_test, y_pred))
 
     # Create feature vectors using the bag-of-words model
-    X_train_vectors = vectorizer.fit_transform(X_train)
-    X_test_vectors = vectorizer.transform(X_test)
+    X_vectors = vectorizer.fit_transform(data)
 
     # Train a Naive Bayes classifier
-    classifier.fit(X_train_vectors, y_train)
-
-    # Predict the labels for the test set
-    y_pred = classifier.predict(X_test_vectors)
-
-    # Evaluate the classifier
-    print(classification_report(y_test, y_pred))
+    classifier.fit(X_vectors, labels)
 
 train_model(dataset_directory)
 
